@@ -1,6 +1,7 @@
 import { Input, Component, OnInit } from '@angular/core';
 import { User } from './_entities/User';
 import { UsersService } from './_services/users.service';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,12 @@ export class AppComponent implements OnInit {
     this.isLogin();
   }
   isLogin() {
-    return true;
+    let checkLogin = localStorage.getItem("userCRS");
+    if (checkLogin == null) {
+      return true;
+    } else {
+      return false;
+    }
   }
   signUp() {
     if (this.userCurrent.username == "" || this.userCurrent.email == "" || this.userCurrent.password == "" || this.passwordConfirm == "") {
@@ -57,12 +63,34 @@ export class AppComponent implements OnInit {
       return;
     } else {
       this.userServices.signIn(this.userCurrent).subscribe(observer => {
-        console.log("cmn:");
-        if(observer==undefined){
-          window.alert("Lỗi cmnr");
+        if (observer == undefined) {
+          window.alert("Đăng nhập thất bại vui lòng kiểm tra lại!");
+          return;
+        } else {
+          window.alert("Đăng nhập thành công!");
+          // console.log("token: " + observer.token);
+          // console.log("id: " + observer.user._id);
+          let userTemp = {
+            _id: observer.user._id,
+            email: observer.user.email,
+            token: observer.token
+          }
+          localStorage.setItem("userCRS", JSON.stringify(userTemp));
         }
       })
     }
+  }
+  logout() {
+    let userLogout = JSON.parse(localStorage.getItem("userCRS"));
+    // console.log(userLogout);
+    // console.log(typeof(userLogout.token))
+    this.userServices.logout(userLogout.token).subscribe(observable =>
+      localStorage.removeItem("userCRS"),
+      err=>{
+        window.alert(err);
+      }
+    );
+    
   }
 
 }

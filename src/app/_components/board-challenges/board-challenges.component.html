@@ -1,1 +1,106 @@
-<p>board-challenges works!</p>
+<div class="container">
+    <!-- <span class="badge">{{post.description}}:{{post.plaintext}}:{{post.key}}:{{post.ciphertext}}:{{post.caesar}}:{{post.level}}</span> -->
+    <!-- Button trigger modal-->
+    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalCart">Submit a
+        joke</button>
+
+    <!-- Modal: modalCart -->
+    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Submit Joke</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="description">Câu hỏi gợi ý(Description):</label>
+                        <input [(ngModel)]="post.description" type="text" class="form-control" id="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="plaintext">Văn bản gốc(Plaintext):</label>
+                        <textarea [(ngModel)]="post.plaintext" rows="3" class="form-control" id="plaintext"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="key">Khóa(Key):</label>
+                        <input [(ngModel)]="post.key" type="text" class="form-control" id="key">
+                    </div>
+                    <div class="form-group">
+                        <label for="ciphertext">Văn bản giải mã(Ciphertext):</label>
+                        <textarea [(ngModel)]="post.ciphertext" class="form-control" rows="3"
+                            id="ciphertext"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="sel1">Loại mã hóa:</label>
+                                <select [(ngModel)]="post.caesar" class="form-control" id="caesar">
+                                    <option>Caesar</option>
+                                    <option>Vigenere</option>
+                                    <option>Playfair</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-16">
+                            <div class="form-group">
+                                <label for="sel1">Mức độ:</label>
+                                <select [(ngModel)]="post.level" class="form-control" id="level">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" (click)="submitNewJoke()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal: modalCart -->
+
+    <div style="text-align:center">
+        <h4>
+            Joke Board
+        </h4>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Plaintext</th>
+                    <th scope="col">Key</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Submitted On</th>
+                    <th scope="col">Solve By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of collection.data | paginate: config">
+                    <th scope="row">{{collection.data.indexOf(item)+1}}</th>
+                    <td>{{item.description}}</td>
+                    <td>{{item.plaintext}}</td>
+                    <td>{{item.key}}</td>
+                    <td>{{item.caesar}}</td>
+                    <td>{{item.submittedon}}</td>
+                    <td>{{item.solvedby.length}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+    </div>
+</div>

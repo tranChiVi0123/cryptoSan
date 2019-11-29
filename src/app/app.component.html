@@ -51,7 +51,8 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
+            <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign
+              up</a>
             <ul class="dropdown-menu form-wrapper">
               <li>
                 <form action="/examples/actions/confirmation.php" method="post">
@@ -87,57 +88,11 @@
       <ng-template #logOutBlock>
         <ul class="nav navbar-nav navbar-right ml-auto">
           <li class="nav-item">
-            <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Lougout</a>
-            <ul class="dropdown-menu form-wrapper">
-              <li>
-                <form action="/examples/actions/confirmation.php" method="post">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="emailSignIn" placeholder="Email"
-                      [(ngModel)]="userCurrent.email" required="required">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" class="form-control" name="passwordSignIn" placeholder="Password"
-                      [(ngModel)]="userCurrent.password" required="required">
-                  </div>
-                  <input type="submit" class="btn btn-primary btn-block" (click)="signIn()" value="Login">
-                  <div class="form-footer">
-                    <a href="#">Forgot Your password?</a>
-                  </div>
-                </form>
-              </li>
-            </ul>
+            <a data-toggle="dropdown" (click)="logout()" class="nav-link dropdown-toggle" href="#">Lougout</a>
           </li>
           <li class="nav-item">
-            <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Your
+            <a href="#" data-toggle="dropdown" routerLink="/profile" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Your
               info</a>
-            <ul class="dropdown-menu form-wrapper">
-              <li>
-                <form action="/examples/actions/confirmation.php" method="post">
-                  <p class="hint-text">Fill in this form to create your account!</p>
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Email" name="emailSignUp" required="required"
-                      [(ngModel)]="userCurrent.email">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" name="usernameSignUp"
-                      required="required" [(ngModel)]="userCurrent.username">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" name="passwordSignUp"
-                      required="required" [(ngModel)]="userCurrent.password">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Confirm Password" name="passwordComfirn"
-                      required="required" [(ngModel)]="passwordConfirm">
-                  </div>
-                  <div class="form-group">
-                    <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a
-                        href="#">Terms &amp; Conditions</a></label>
-                  </div>
-                  <input type="submit" class="btn btn-primary btn-block" (click)="signUp()" value="Sign up">
-                </form>
-              </li>
-            </ul>
           </li>
         </ul>
       </ng-template>
