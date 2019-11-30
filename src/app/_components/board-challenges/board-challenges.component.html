@@ -20,26 +20,26 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="description">Câu hỏi gợi ý(Description):</label>
-                        <input [(ngModel)]="post.description" type="text" class="form-control" id="description">
+                        <input [(ngModel)]="postNew.description" type="text" class="form-control" id="description">
                     </div>
                     <div class="form-group">
                         <label for="plaintext">Văn bản gốc(Plaintext):</label>
-                        <textarea [(ngModel)]="post.plaintext" rows="3" class="form-control" id="plaintext"></textarea>
+                        <textarea [(ngModel)]="postNew.plaintext" rows="3" class="form-control" id="plaintext"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="key">Khóa(Key):</label>
-                        <input [(ngModel)]="post.key" type="text" class="form-control" id="key">
+                        <input [(ngModel)]="postNew.key" type="text" class="form-control" id="key">
                     </div>
                     <div class="form-group">
                         <label for="ciphertext">Văn bản giải mã(Ciphertext):</label>
-                        <textarea [(ngModel)]="post.ciphertext" class="form-control" rows="3"
+                        <textarea [(ngModel)]="postNew.ciphertext" class="form-control" rows="3"
                             id="ciphertext"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="sel1">Loại mã hóa:</label>
-                                <select [(ngModel)]="post.caesar" class="form-control" id="caesar">
+                                <select [(ngModel)]="postNew.caesar" class="form-control" id="caesar">
                                     <option>Caesar</option>
                                     <option>Vigenere</option>
                                     <option>Playfair</option>
@@ -49,7 +49,7 @@
                         <div class="col-16">
                             <div class="form-group">
                                 <label for="sel1">Mức độ:</label>
-                                <select [(ngModel)]="post.level" class="form-control" id="level">
+                                <select [(ngModel)]="postNew.level" class="form-control" id="level">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -80,7 +80,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Plaintext</th>
+                    <th scope="col">Ciphertext</th>
                     <th scope="col">Key</th>
                     <th scope="col">Type</th>
                     <th scope="col">Submitted On</th>
@@ -88,19 +88,66 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of collection.data | paginate: config">
+                <tr *ngFor="let item of collection.data | paginate: config" (click)="tableRowClick(collection.data.indexOf(item))" data-toggle="modal" data-target="#modalPost">
                     <th scope="row">{{collection.data.indexOf(item)+1}}</th>
                     <td>{{item.description}}</td>
-                    <td>{{item.plaintext}}</td>
+                    <td>{{item.ciphertext}}</td>
                     <td>{{item.key}}</td>
                     <td>{{item.caesar}}</td>
                     <td>{{item.submittedon}}</td>
                     <td>{{item.solvedby.length}}</td>
+                    <td><button type="button" class="btn btn-outline-light "><i
+                                class="fas fa-award" style="font-size:24px;color:black"></i></button></td>
                 </tr>
             </tbody>
         </table>
-
         <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-
+        <!-- Modal: modalPost -->
+        <div class="modal fade" id="modalPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModal">Joker</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="description">Câu hỏi gợi ý(Description):</label>
+                            <input [(ngModel)]="post.description" type="text" class="form-control" id="descriptionn" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="ciphertext">Văn bản giải mã(Ciphertext):</label>
+                            <textarea [(ngModel)]="post.ciphertext" class="form-control" rows="3"
+                                id="ciphertext" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="key">Khóa(Key):</label>
+                            <input [(ngModel)]="post.key" type="text" class="form-control" id="keyy" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="sel1">Loại mã hóa:</label>
+                            <input [(ngModel)]="post.caesar" type="text" class="form-control" id="sel1" disabled>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="plaintext">Văn bản gốc(Plaintext):</label>
+                            <textarea [(ngModel)]="answer" rows="3" class="form-control"
+                                id="plaintextt"></textarea>
+                        </div>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" (click)="submitAnswer()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal: modalPost -->
     </div>
 </div>

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Post } from '../_entities/Post';
+import { Post, PostNew } from '../_entities/Post';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 const url: string = "https://cryptoipa.herokuapp.com/posts";
 const token: string = JSON.parse(localStorage.getItem('userCRS')).token;
+const userID: string = JSON.parse(localStorage.getItem('userCRS'))._id;
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +22,7 @@ export class PostService {
     private httpClient: HttpClient
   ) { }
 
-  newPost(post: Post): Observable<any> {
+  newPost(post: PostNew): Observable<any> {
     console.log(post);
     return this.httpClient.post<any>(url, post, this.httpOptions).pipe(
       catchError(this.handleError<any>())
@@ -29,6 +30,12 @@ export class PostService {
   }
   getPosts(): Observable<any> {
     return this.httpClient.get<any>(url).pipe(
+      catchError(this.handleError<any>())
+    );
+  }
+  solvePost(idpost):Observable<any>{
+    let url: string = "https://cryptoipa.herokuapp.com/posts/me/"+userID;
+    return this.httpClient.put(url,idpost,this.httpOptions).pipe(
       catchError(this.handleError<any>())
     );
   }
