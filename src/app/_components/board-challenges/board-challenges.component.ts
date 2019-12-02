@@ -27,9 +27,9 @@ export class BoardChallengesComponent implements OnInit {
     caesar: '',
     submittedby: '',
   }
+  isLogin: boolean = JSON.parse(localStorage.getItem('userCRS')) ? true : false;
   posts: Post[] = [];
   answer: string = "";
-
   config: any;
   collection = { count: 0, data: [] };
   constructor(
@@ -55,20 +55,25 @@ export class BoardChallengesComponent implements OnInit {
     };
   }
   submitNewJoke() {
-    this.postNew.submittedby = JSON.parse(localStorage.getItem('userCRS'))._id;
+    this.postNew.submittedby = JSON.parse(localStorage.getItem('userCRS')) ? JSON.parse(localStorage.getItem('userCRS'))._id : "";
     this.postService.newPost(this.postNew).subscribe(
-      result => window.alert(result),
+      result => {
+        window.alert("Thêm mới thành công");
+        window.location.reload();
+      },
       err => console.log(err)
     );
   }
   submitAnswer() {
     if (this.post.plaintext.toLocaleUpperCase() === this.answer.toLocaleUpperCase().trim()) {
-      window.alert("Chúc mừng bạn");
       let sender = {
-        idpost:this.post._id
+        idpost: this.post._id
       }
       this.postService.solvePost(sender).subscribe(
-        result => window.alert(result),
+        result => {
+          window.alert("Chúc mừng bạn");
+          window.location.reload();
+        },
         err => console.log(err)
       )
     } else {
@@ -81,6 +86,17 @@ export class BoardChallengesComponent implements OnInit {
 
   pageChanged(event) {
     this.config.currentPage = event;
+  }
+  sovled(items) {
+    let idusercurrent = JSON.parse(localStorage.getItem('userCRS')) ? JSON.parse(localStorage.getItem('userCRS'))._id : "";
+    if (idusercurrent == "") {
+      return false;
+    }
+    if (items.indexOf(idusercurrent) > -1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

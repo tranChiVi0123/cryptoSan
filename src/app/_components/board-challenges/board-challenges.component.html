@@ -1,8 +1,10 @@
 <div class="container">
     <!-- <span class="badge">{{post.description}}:{{post.plaintext}}:{{post.key}}:{{post.ciphertext}}:{{post.caesar}}:{{post.level}}</span> -->
     <!-- Button trigger modal-->
-    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalCart">Submit a
-        joke</button>
+    <div *ngIf="isLogin"><button type="button" class="btn btn-outline-success" data-toggle="modal"
+            data-target="#modalCart">Submit a
+            joke</button></div>
+
 
     <!-- Modal: modalCart -->
     <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -24,7 +26,8 @@
                     </div>
                     <div class="form-group">
                         <label for="plaintext">Văn bản gốc(Plaintext):</label>
-                        <textarea [(ngModel)]="postNew.plaintext" rows="3" class="form-control" id="plaintext"></textarea>
+                        <textarea [(ngModel)]="postNew.plaintext" rows="3" class="form-control"
+                            id="plaintext"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="key">Khóa(Key):</label>
@@ -88,7 +91,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of collection.data | paginate: config" (click)="tableRowClick(collection.data.indexOf(item))" data-toggle="modal" data-target="#modalPost">
+                <tr *ngFor="let item of collection.data | paginate: config"
+                    (click)="tableRowClick(collection.data.indexOf(item))" data-toggle="modal" data-target="#modalPost"
+                    style="cursor: pointer;">
                     <th scope="row">{{collection.data.indexOf(item)+1}}</th>
                     <td>{{item.description}}</td>
                     <td>{{item.ciphertext}}</td>
@@ -96,8 +101,14 @@
                     <td>{{item.caesar}}</td>
                     <td>{{item.submittedon}}</td>
                     <td>{{item.solvedby.length}}</td>
-                    <td><button type="button" class="btn btn-outline-light "><i
-                                class="fas fa-award" style="font-size:24px;color:black"></i></button></td>
+                    <td><button type="button" class="btn btn-outline-light ">
+                            <div *ngIf="sovled(item.solvedby); then thenBlock else elseBlock"></div>
+                            <ng-template #thenBlock><i class="fas fa-award" style="font-size:24px;color:red"></i>
+                            </ng-template>
+                            <ng-template #elseBlock><i class="fas fa-award" style="font-size:24px;color:black"></i>
+                            </ng-template>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -118,12 +129,13 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="description">Câu hỏi gợi ý(Description):</label>
-                            <input [(ngModel)]="post.description" type="text" class="form-control" id="descriptionn" disabled>
+                            <input [(ngModel)]="post.description" type="text" class="form-control" id="descriptionn"
+                                disabled>
                         </div>
                         <div class="form-group">
                             <label for="ciphertext">Văn bản giải mã(Ciphertext):</label>
-                            <textarea [(ngModel)]="post.ciphertext" class="form-control" rows="3"
-                                id="ciphertext" disabled></textarea>
+                            <textarea [(ngModel)]="post.ciphertext" class="form-control" rows="3" id="ciphertext"
+                                disabled></textarea>
                         </div>
                         <div class="form-group">
                             <label for="key">Khóa(Key):</label>
@@ -133,11 +145,10 @@
                             <label for="sel1">Loại mã hóa:</label>
                             <input [(ngModel)]="post.caesar" type="text" class="form-control" id="sel1" disabled>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="plaintext">Văn bản gốc(Plaintext):</label>
-                            <textarea [(ngModel)]="answer" rows="3" class="form-control"
-                                id="plaintextt"></textarea>
+                            <textarea [(ngModel)]="answer" rows="3" class="form-control" id="plaintextt"></textarea>
                         </div>
                     </div>
                     <!--Footer-->

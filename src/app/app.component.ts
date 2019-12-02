@@ -76,6 +76,7 @@ export class AppComponent implements OnInit {
             token: observer.token
           }
           localStorage.setItem("userCRS", JSON.stringify(userTemp));
+          window.location.reload();
         }
       })
     }
@@ -85,7 +86,10 @@ export class AppComponent implements OnInit {
     // console.log(userLogout);
     // console.log(typeof(userLogout.token))
     this.userServices.logout(userLogout.token).subscribe(observable =>
-      localStorage.removeItem("userCRS"),
+      {
+        localStorage.removeItem("userCRS");
+        window.location.reload();
+      },
       err=>{
         window.alert(err);
       }
