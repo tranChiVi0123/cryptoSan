@@ -1,1 +1,36 @@
-<p>playfair works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="jumbotron">
+                <h1>Mật mã Playfair</h1>
+                <p>Mật mã Playfair là một hệ mã hóa nhiều chữ, giảm bớt tương quan giữa văn bản mã hóa và nguyên bản
+                    bằng cách mã hóa đồng thời nhiều chữ cái của nguyên bản. Cơ chế hoạt động như sau: sử dụng một ma
+                    trận chữ cái 5x5 trên cơ sở một từ khóa: điền các chữ cái của từ khóa (bỏ các chữ trùng), điền những
+                    vị trí còn lại của ma trận với các chữ cái khác của bảng chữ cái; I, J có thể ở trên cùng một ô của
+                    ma trận.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="form-group">
+                <h3><u>Step 1:</u></h3>
+                <h6>Enter your message, either plaintext or cipher text.</h6>
+                <textarea [(ngModel)]="sender.text" name="text" class="form-control" rows="10" id="commentText"></textarea>
+
+            </div>
+        </div>
+        <div class="col-4">
+            <h3><u>Step 2:</u></h3>
+            <h6>Enter your keyword.</h6>
+            <input [(ngModel)]="sender.key" name="key" type="text" placeholder="Require key is just letter" id="comentKey">
+            <h3><u>Step 3:</u></h3>
+            <h6>What do you want to do?</h6>
+            <div class="btn-group">
+                <button id="decrypt" type="button" class="btn btn-outline-secondary waves-effect" (click)="decrypt()">Giải mã</button>
+
+                <button id="encrypt" type="button" class="btn btn-outline-info waves-effect" (click)="ecrypt()">Mã hóa</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 export class Post {
-    _id: string
+    _id: string;
     plaintext: string;
     key: string;
     ciphertext: string;

@@ -32,6 +32,7 @@ export class BoardChallengesComponent implements OnInit {
   answer: string = "";
   config: any;
   collection = { count: 0, data: [] };
+  
   constructor(
     private postService: PostService
   ) {

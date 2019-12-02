@@ -1,1 +1,36 @@
-<p>caesar works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="jumbotron">
+                <h1>Mật mã Caesar</h1>
+                <p>Trong mật mã học, mật mã Caesar, còn gọi là mật mã dịch chuyển, là một trong những mật mã đơn giản và
+                    được biết đến nhiều nhất. Mật mã Caesar là một dạng của mật mã thay thế, trong đó mỗi ký tự trong
+                    văn bản được thay thế bằng một ký tự cách nó một đoạn trong bảng chữ cái để tạo thành bản mã. Vĩ dụ,
+                    nếu độ dịch là 3, A sẽ được thay bằng D, Ă sẽ được thay bằng C và cứ thế đến hết. Phương pháp được
+                    đặt tên theo Caesar, vị hoàng đế đã sử dụng nó thường xuyên trong công việc.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="form-group">
+                <h3><u>Step 1:</u></h3>
+                <h6>Enter your message, either plaintext or cipher text.</h6>
+                <textarea name="text" [(ngModel)]="sender.text" class="form-control" rows="10" id="commentText"></textarea>
+
+            </div>
+        </div>
+        <div class="col-4">
+            <h3><u>Step 2:</u></h3>
+            <h6>Enter your keyword.</h6>
+            <input type="text" name="key" [(ngModel)]="sender.key" placeholder="Key is number" id="comentKey">
+            <h3><u>Step 3:</u></h3>
+            <h6>What do you want to do?</h6>
+            <div class="btn-group">
+                <button id="decrypt" type="button" class="btn btn-outline-secondary waves-effect" (click)="decrypt()">Giải mã</button>
+
+                <button id="encrypt" type="button" class="btn btn-outline-info waves-effect" (click)="ecrypt()">Mã hóa</button>
+            </div>
+        </div>
+    </div>
+</div>

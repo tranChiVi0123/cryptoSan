@@ -1,1 +1,33 @@
-<p>vinegere works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="jumbotron">
+                <h1>Mật mã Vinegère</h1>
+                <p>Mật mã Vigenère là một phương pháp mã hóa văn bản bằng cách sử dụng xen kẽ một số phép mã hóa Caesar
+                    khác nhau dựa trên các chữ cái của một từ khóa. Nó là một dạng đơn giản của mật mã thay thế dùng
+                    nhiều bảng chữ cái.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="form-group">
+                <h3><u>Step 1:</u></h3>
+                <h6>Enter your message, either plaintext or cipher text.</h6>
+                <textarea [(ngModel)]="sender.text" class="form-control" rows="10" id="commentText"></textarea>
+
+            </div>
+        </div>
+        <div class="col-4">
+            <h3><u>Step 2:</u></h3>
+            <h6>Enter your keyword.</h6>
+            <input [(ngModel)]="sender.key" name="key" type="text" placeholder="Require key is just letter" id="comentKey">
+            <h3><u>Step 3:</u></h3>
+            <h6>What do you want to do?</h6>
+            <div class="btn-group">
+                <button id="decrypt" type="button" class="btn btn-outline-secondary waves-effect" (click)="decrypt()">Giải mã</button>
+                <button id="encrypt" type="button" class="btn btn-outline-info waves-effect" (click)="ecrypt()">Mã hóa</button>
+            </div>
+        </div>
+    </div>
+</div>
