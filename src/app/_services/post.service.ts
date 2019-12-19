@@ -39,6 +39,12 @@ export class PostService {
       catchError(this.handleError<any>())
     );
   }
+  getRank():Observable<any>{
+    let urlRank:string = "https://cryptoipa.herokuapp.com/posts/rank";
+    return this.httpClient.get<any>(urlRank).pipe(
+      catchError(this.handleError<any>())
+    );
+  }
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // // TODO: send the error to remote logging infrastructure
