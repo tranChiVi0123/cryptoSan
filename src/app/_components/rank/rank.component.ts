@@ -22,21 +22,9 @@ export class RankComponent implements OnInit {
   ngOnInit() {
     this.postService.getRank().subscribe(
       result => {
-        console.log(result);
+        //console.log(result);
         result.forEach(element => {
           this.arr.push(element);
-        });
-      },
-      err => console.log(err)
-    );
-    this.userService.getAllUser().subscribe(
-      result => {
-        this.arr.forEach((element) => {
-          result.forEach((item) => {
-            if (element.key == item._id) {
-              element.key = item.username;
-            }
-          });
         });
       },
       err => console.log(err)

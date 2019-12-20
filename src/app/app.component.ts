@@ -2,6 +2,7 @@ import { Input, Component, OnInit } from '@angular/core';
 import { User } from './_entities/User';
 import { UsersService } from './_services/users.service';
 import { observable } from 'rxjs';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
   passwordConfirm: String = "";
 
   constructor(
-    private userServices: UsersService
+    private userServices: UsersService,
+    //private router: Route
   ) {
 
   }
@@ -85,16 +87,16 @@ export class AppComponent implements OnInit {
     let userLogout = JSON.parse(localStorage.getItem("userCRS"));
     // console.log(userLogout);
     // console.log(typeof(userLogout.token))
-    this.userServices.logout(userLogout.token).subscribe(observable =>
-      {
-        localStorage.removeItem("userCRS");
-        window.location.reload();
-      },
-      err=>{
+    this.userServices.logout(userLogout.token).subscribe(observable => {
+      localStorage.removeItem("userCRS");
+      window.location.reload();
+      //this.router.redirectTo['/home'];
+    },
+      err => {
         window.alert(err);
       }
     );
-    
+
   }
 
 }

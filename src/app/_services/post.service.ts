@@ -28,6 +28,12 @@ export class PostService {
       catchError(this.handleError<any>())
     );
   }
+  postUpdate(post:Post):Observable<any>{
+    let url ="https://cryptoipa.herokuapp.com/posts/"+post._id;
+    return this.httpClient.put<any>(url, post, this.httpOptions).pipe(
+      catchError(this.handleError<any>())
+    );
+  }
   getPosts(): Observable<any> {
     return this.httpClient.get<any>(url).pipe(
       catchError(this.handleError<any>())
@@ -41,6 +47,7 @@ export class PostService {
   }
   getRank():Observable<any>{
     let urlRank:string = "https://cryptoipa.herokuapp.com/posts/rank";
+    //let urlRank:string = "http://localhost:3001/posts/rank";
     return this.httpClient.get<any>(urlRank).pipe(
       catchError(this.handleError<any>())
     );

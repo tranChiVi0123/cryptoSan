@@ -1,1 +1,204 @@
-<p>profile works!</p>
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">User Profile</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>About</h6>
+                            <p>
+                                Web Designer, UI/UX Engineer
+                            </p>
+                            <h6>Hobbies</h6>
+                            <p>
+                                Indie music, skiing and hiking. I love the great outdoors.
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Your Post
+                            </h5>
+                            <table class="table table-sm table-hover table-striped">
+                                <tbody>
+                                    <tr *ngFor="let item of posts | paginate: config" data-toggle="modal"
+                                        (click)="tableRowClick(collection.data.indexOf(item))" data-target="#modalCart"
+                                        style="cursor: pointer;">
+                                        <td><strong>{{item.description}}</strong></td>
+                                        <td>{{item.ciphertext}}</td>
+                                        <td>{{item.key}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <div class="tab-pane" id="messages">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>.
+                        Use this to show important messages to the user.
+                    </div>
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link
+                                    to the latest summary report from the..
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">Yesterday</span> There has been a
+                                    request on your account since that was..
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices
+                                    quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt
+                                    ullamcorper eros eget luctus.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix
+                                    for tibulum tincidunt ullamcorper eros.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="edit">
+                    <form role="form">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" name="email" [(ngModel)]="userCurrent.email" type="email"
+                                    value="email@gmail.com">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" name="username" [(ngModel)]="userCurrent.username"
+                                    type="text" value="janeuser">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" name="password" [(ngModel)]="userCurrent.password"
+                                    type="password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="password"
+                                    value="$2a$08$XwKVsCuYm2h6eWtMIrc3Oe3WMhedSpfsCLxoKeRPPRGN/WrTUaksO">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input type="reset" class="btn btn-secondary" value="Cancel">
+                                <input type="button" (click)="onUpdate()" class="btn btn-primary" value="Save Changes">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <h6 class="mt-2">Upload a different photo</h6>
+            <label class="custom-file">
+                <input type="file" id="file" class="custom-file-input">
+                <span class="custom-file-control">Choose file</span>
+            </label>
+        </div>
+    </div>
+    <!-- Modal: modalCart -->
+    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Submit Joke</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="description">Câu hỏi gợi ý(Description):</label>
+                        <input [(ngModel)]="postUpdate.description" type="text" class="form-control" id="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="plaintext">Văn bản gốc(Plaintext):</label>
+                        <textarea [(ngModel)]="postUpdate.plaintext" rows="3" class="form-control"
+                            id="plaintext"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="key">Khóa(Key):</label>
+                        <input [(ngModel)]="postUpdate.key" type="text" class="form-control" id="key">
+                    </div>
+                    <div class="form-group">
+                        <label for="ciphertext">Văn bản giải mã(Ciphertext):</label>
+                        <textarea [(ngModel)]="postUpdate.ciphertext" class="form-control" rows="3"
+                            id="ciphertext"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="sel1">Loại mã hóa:</label>
+                                <select [(ngModel)]="postUpdate.caesar" class="form-control" id="caesar">
+                                    <option>Caesar</option>
+                                    <option>Vigenere</option>
+                                    <option>Playfair</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-16">
+                            <div class="form-group">
+                                <label for="sel1">Mức độ:</label>
+                                <select [(ngModel)]="postUpdate.level" class="form-control" id="level">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" (click)="updateJoke()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal: modalCart -->
+</div>
